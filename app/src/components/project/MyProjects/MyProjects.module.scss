@@ -1,0 +1,53 @@
+.wrapper {
+  min-height: 100px;
+  padding-top: 40px;
+}
+
+.spinner {
+  margin: 0 auto;
+}
+
+.content {
+
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  // text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.navigation {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 23px;
+  margin-bottom: 30px;
+  span {
+    cursor: pointer;
+  }
+  i {
+    margin: 0 .3em;
+  }
+  .active {
+    font-weight: 500;
+    color: #1750BE;
+  }
+}
+
+
+@media only screen and (max-width: 1023px) {
+  .navigation {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    i {
+      margin: 0 .2em;
+    }
+  }
+}

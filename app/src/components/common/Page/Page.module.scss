@@ -1,0 +1,29 @@
+.wrapper {
+  
+}
+
+.title {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  word-break: break-word;
+  a {
+    // color: $ui-05;
+    text-decoration: none;
+    &:hover {
+      // color: $interactive-01;
+    }
+  }
+}
+
+.content {
+  margin-top: 20px;
+}
+
+
+
+@media only screen and (min-width: 1056px) {
+  .title {
+    padding-right: 78px;
+  }
+}

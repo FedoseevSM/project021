@@ -1,0 +1,38 @@
+.form {
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
+  div {
+    flex-basis: 100%;
+  }
+  button {
+    margin-left: 8px;
+  }
+}
+
+.projects {
+  grid-template-columns: 1fr 1fr;
+  margin-top: 40px;
+}
+
+@media only screen and (max-width: 799px) {
+  .projects {
+    grid-template-columns: 1fr;
+  }
+}
+
+.title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 32px;
+  word-break: break-word;
+    
+}
+.field {
+  
+}
+.wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 0;
+}

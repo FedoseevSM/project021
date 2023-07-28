@@ -1,0 +1,84 @@
+@import '~vars.css';
+
+.wrapper {
+  position: relative;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 39px;
+  padding-right: 26px;
+}
+
+.content {
+  margin: 20px 0;
+}
+
+.important {
+  // color: $danger;
+  font-size: 1.4em;
+  margin-right: 4px;
+}
+
+
+
+.files {
+  margin: 36px 0;
+}
+
+.filesList {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.filesTitle {
+  font-size: 24px;
+}
+
+.file {
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+  line-height: 1;
+  margin-top: 8px;
+  margin-right: 4px;
+  &:hover {
+    color: var(--blue-color);
+  }
+  span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 200px;
+    margin-left: 4px;
+  }
+}
+
+.file a {
+  // color: $interactive-01;
+}
+
+.edit {
+  position: absolute;
+  right: 0;
+  top: 6px;
+  cursor: pointer;
+  // color: $ui-05;
+  &:hover {
+    // color: $interactive-01;
+  }
+}
+
+.menu {
+  margin-top: 20px;
+}
+
+@media only screen and (min-width: 1280px) {
+  .menu {
+    display: none;
+  }
+}

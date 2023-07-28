@@ -1,0 +1,150 @@
+@import '~vars.css';
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.highlight {
+  // outline: 1px solid $interactive-01;
+}
+
+.name {
+  font-weight: normal;
+  font-size: 16px;
+  text-decoration: none;
+  color: black;
+  word-break: break-word;
+  span {
+    margin-left: 4px;
+  }
+}
+
+a.name {
+  &:hover {
+    color: var(--blue-color);
+  }
+}
+
+.content {
+  padding-top: 20px;
+  flex-basis: 100%;
+}
+.anonymous {
+  font-weight: normal;
+  font-size: 16px;
+  text-decoration: none;
+  color: black;
+  word-break: break-word;
+}
+
+.text {
+  font-size: 14px;
+  margin-top: 8px;
+  word-break: break-word;
+  line-height: 18px;
+}
+
+.deletedText {
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 40px;
+  margin-top:  -4px;
+}
+
+.bottom {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  
+}
+
+.date {
+  font-weight: normal;
+  font-size: 16px;
+  margin-top: 12px;
+}
+
+.reply {
+  cursor: pointer;
+  font-weight: normal;
+  font-size: 14px;
+  &:hover {
+    color: var(--blue-color);
+  }
+}
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  align-items:center
+}
+
+.action {
+  margin-right: 8px;
+  cursor: pointer;
+  font-weight: normal;
+  font-size: 14px;
+  &:hover {
+    color: var(--blue-color);
+  }
+}
+
+.image {
+  position: relative;
+  margin-top: 12px;
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+.userImage {
+  // background-color: $ui-04;
+  flex-basis: 50px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 16px;
+  background-size: cover;
+  background-position: center center;
+  background-color: #C4C4C4;
+}
+
+.answers {
+  padding-left: 25px;
+}
+
+.answer {
+  margin-top: 5px;
+}
+
+.addAnswer {
+  padding-left: 70px;
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  svg {
+    cursor: pointer;
+  }
+}
+
+
+.likeCount {
+  font-weight: 300;
+  font-size: 12px;
+  margin: 0 7px;
+}
+
+.loadAnswer {
+  padding-top: 9px;
+  padding-left: 8px;
+  span {
+    cursor: pointer;
+  }
+}

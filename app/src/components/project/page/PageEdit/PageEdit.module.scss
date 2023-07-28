@@ -1,0 +1,187 @@
+@import '~vars.css';
+
+.wrapper {
+  position: relative;
+}
+
+.top {
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  & > div {
+    flex: 1;
+  }
+}
+
+.input {
+  width: 100%;
+}
+
+.name {
+  flex-basis: 100%;
+  border: none;
+  padding: 0;
+  font-size: 24px;
+  font-weight: 600;
+  
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    font-style: italic;
+  }
+}
+.checkboxes {
+  display: flex;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  & span:first-child {
+    color:  rgba(0, 0, 0, 0.5);
+    padding: 0;
+    margin-right: 4px;
+  }
+  & span:last-child {
+    font-weight: 300;
+    font-size: 14px;
+  }
+  
+}
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.actionsRight {
+  display: flex;
+  align-items: center;
+  button {
+    margin-left: 31px;
+  }
+}
+
+.actionsLeft {
+  display: flex;
+  align-items: center;
+  button {
+    margin-right: 20px;
+  }
+}
+
+.editor {
+  margin: 36px 0 16px;
+}
+
+
+.popup {
+  padding: 20px;
+}
+
+.popupTitle {
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.popupForm {
+  
+}
+
+.displayDraft { 
+  padding: 10px 0 40px;
+  span {
+    color: #1750BE;
+    cursor: pointer;
+    margin-right: 12px;
+    font-size: 14px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.filesList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.file {
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  margin-top: 8px;
+  margin-right: 4px;
+  span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 200px;
+  }
+}
+
+.removeFile {
+  cursor: pointer;
+  
+  &:hover {
+    color: var(--blue-color);
+  }
+}
+
+.imageDrop {
+  margin: 20px 0;
+  font-weight: normal;
+  font-size: 20px;
+  border: 1px solid #C4C4C4;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 189px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  &:hover {
+    color: var(--blue-color);
+    cursor: pointer;
+  }
+}
+
+.activeImageDrop {
+  background: #C4C4C4;
+}
+
+.rejectImageDrop {
+  color: var(--red-color)
+}
+
+
+@media only screen and (max-width: 799px) {
+  .actions {
+    display: block;
+  }
+  .actionsLeft {
+    button {
+      margin-right: 8px;
+    }
+  }
+  .actionsRight {
+    margin-top: 12px;
+    button {
+      margin-left: 0;
+      margin-right: 16px;
+    }
+  }
+
+  .displayDraft {
+    padding-bottom: 20px;
+    span {
+      display: block;
+      margin: 12px 0;
+    }
+  }
+}

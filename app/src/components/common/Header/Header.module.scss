@@ -1,0 +1,351 @@
+@import '~vars.css';
+
+.container {
+  background: var(--blue-color);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+}
+.link {
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.authLink {
+  font-weight: bold;
+}
+
+.authIconCount {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: var(--red-color);
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+}
+
+
+.authIcon {
+  margin-right: 40px;
+  cursor: pointer;
+  position: relative;
+}
+.user {
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  border-radius: 30px;
+  cursor: pointer;
+  background-color: white;
+}
+
+
+.notifications {
+  position: absolute;
+  background: white;
+  top: 20px;
+  right: 12px;
+  width: 400px;
+  text-align: left;
+  cursor: default;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.notificationsEmpty {
+  font-size: 16px;
+  padding: 4px 16px 20px;
+  text-align: center;
+}
+
+.notificationsList {
+  padding: 0 55px;
+  overflow: auto;
+  max-height: 550px;
+}
+
+.notification {
+  cursor: pointer;
+  // font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  margin-bottom: 16px;
+  position: relative;
+  b {
+    font-weight: 500;
+  }
+  &:hover {
+    background: rgba(white, 0.5);
+    color:  #161616;
+  }
+}
+
+.unreadNotification:before {
+  position: absolute;
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #E10000;
+  border-radius: 50%;
+  top: 6px;
+  transform: translateX(-18px);
+}
+
+.notificationsListTitle {
+  padding: 16px 16px;
+  font-weight: 600;
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.menuIcon {
+  color: white;
+  cursor: pointer;
+  margin-right: 16px;
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, .5);
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: var(--blue-color);
+  width: 300px;
+  z-index: 1010;
+  box-sizing: border-box;
+  padding: 20px 30px;
+  .logo {
+    width: 180px;
+  }
+  ul {
+    margin-top: 12px;
+  }
+  li {
+    padding: 12px 0;
+  }
+}
+
+.search {
+  background: white;
+  display: flex;
+  align-items: stretch;
+  height: 30px;
+  width: 200px;
+  background: #F6F6F6;
+  border-radius: 5px;
+  margin-right: 40px;
+  input {
+    border: none;
+    background: transparent;
+    font-weight: 300;
+    font-size: 18px;
+    color: #000000;
+    padding: 0 10px;
+    margin: 0;
+    flex-basis: 100%;
+    min-width: 0;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      font-weight: 300;
+      font-size: 18px;
+      color: #000000;
+    }
+  }
+  button {
+    background: transparent;
+    border: none;
+    padding: 0 9px;
+    margin: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+  svg {}
+}
+
+
+
+@media only screen and (min-width: 800px) and (max-width: 1279px) {
+  .search {
+    width: 250px;
+  }
+  .logo {
+    width: 150px;
+    margin-right: 40px;
+  }
+
+  .link {
+    font-size: 18px;
+  }
+  
+  .authLink {
+    font-size: 22px;
+  }
+  .left {
+    height: 60px;
+  }
+  .authIcon {
+    margin-right: 32px;
+    svg {
+      width: 20px;
+    }
+  }
+  .user {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media only screen and (min-width: 1280px) and (max-width: 1919px) {
+  .search {
+    width: 400px;
+  }
+  .logo {
+    width: 200px;
+    margin-right: 124px;
+  }
+
+  .link {
+    font-size: 22px;
+  }
+  
+  .authLink {
+    font-size: 26px;
+  }
+  .left {
+    height: 79px;
+  }
+  .user {
+    width: 40px;
+    height: 40px;
+  }
+  .authIcon {
+    margin-right: 36px;
+    svg {
+      width: 24px;
+    }
+  }
+}
+
+
+
+@media only screen and (min-width: 1920px) {
+  .search {
+    width: 500px;
+  }
+  .logo {
+    width: 266px;
+    margin-right: 168px;
+  }
+  .link {
+    font-size: 25px;
+  }
+  
+  .authLink {
+    font-size: 30px;
+  }
+
+  .left {
+    height: 106px;
+  }
+}
+
+@media only screen and (max-width: 799px) {
+  .search {
+    display: none;
+  }
+  .menu .search {
+    display: flex !important;
+    width: 100%;
+    margin-top: 20px;
+  }
+  .menuIcon {
+    display: block;
+  }
+  .links {
+    display: none;
+  }
+  .logo {
+    width: 100px;
+    margin-right: 0;
+  }
+
+  .link {
+    font-size: 18px;
+  }
+  
+  .authLink {
+    font-size: 22px;
+  }
+  .left {
+    height: 60px;
+  }
+  .authIcon {
+    margin-right: 16px;
+    svg {
+      width: 20px;
+    }
+  }
+  .user {
+    width: 24px;
+    height: 24px;
+  }
+
+  
+}
+
+@media only screen and (max-width: 799px) {
+  .notifications {
+    width: auto;
+    right: 20px;
+    left: 20px;
+    position: fixed;
+    bottom: 20px;
+  }
+
+  .notificationsList {
+    max-height: calc(100vh - 100px);
+  }
+}

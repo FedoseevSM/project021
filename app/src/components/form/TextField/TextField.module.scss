@@ -1,0 +1,52 @@
+@import '~vars.css';
+
+.wrapper {
+
+}
+
+.label {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 23px;
+  margin-bottom: 20px;
+}
+.fullWidth {
+  .input {
+    width: 100%;
+  }
+}
+.input {
+  border: 1px solid #C4C4C4;
+  border-radius: 5px;
+  height: 25px;
+  font-size: 13px;
+  background: transparent;
+  box-sizing: border-box;
+  padding: 0 8px;
+  font-weight: 300;
+}
+
+.invalid {
+  
+  .label {
+    color: var(--red-color);
+  }
+  .input {
+    border-color: var(--red-color) !important;
+    outline: none !important;
+  } 
+}
+
+.invalidText {
+  color: var(--red-color);
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 5px;
+}
+
+.big {
+  font-size: 18px;
+  height: 38px;
+}
+

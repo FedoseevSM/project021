@@ -1,0 +1,101 @@
+
+@import '~vars.css';
+
+.wrapper {
+  position: relative;
+  padding-right: 40px;
+}
+
+.empty {
+  span {
+
+  }
+}
+
+.row {
+  padding: 4px 0;
+  word-break: break-word;
+}
+
+.rowName {
+  font-size: 18px;
+  line-height: 23px;
+  font-weight: 300;
+  position: relative;
+}
+
+.addIcon {
+  visibility: hidden;
+  margin-left: 8px;
+  position: absolute;
+  top: 50%;
+  right: -8px;
+  transform: translateY(-50%);
+  font-weight: 300;
+  cursor: pointer;
+  font-size: 26px;
+  &:hover {
+    color: var(--blue-color);
+  }
+}
+
+.importantIcon {
+  width: 15px;
+  height: 15px;
+}
+
+.emptyAdd {
+  font-size: 12px;
+  margin-left: 18px;
+  cursor: pointer;
+  &:hover {
+    color: var(--blue-color);
+  }
+}
+
+.rowName:hover .addIcon {
+  visibility: visible;
+}
+
+.rowLink {
+  display: flex;
+  align-items: flex-start;
+  color: black;
+  text-decoration: none;
+  &:hover {
+    color: var(--blue-color);
+  }
+  span {
+    margin-left: 4px;
+  }
+  svg {
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 16px;
+    margin-top: 6px;
+    margin-right: 6px;
+  }
+}
+
+.activeLink {
+  font-weight: 600;
+}
+
+.rowContent {
+  padding-left: 18px;
+  margin-top: 8px;
+}
+
+.rootRow {
+  & > .rowName {
+    font-weight: 500;
+  }
+}
+
+.rowUnpublished {
+  font-style: italic;
+}
+
+.rowDeleted {
+  text-decoration: line-through;
+}

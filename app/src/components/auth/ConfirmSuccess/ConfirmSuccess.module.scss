@@ -1,0 +1,14 @@
+.wrapper {
+  text-align: center;
+  font-size: 28px;
+  margin-top: 40px;
+  span {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  span:hover {
+    // color: $interactive-01;
+  }
+}
+

@@ -1,0 +1,33 @@
+@import '~vars.css';
+
+.wrapper {
+  position: relative;
+  background: var(--blue-color);
+}
+
+.inner {
+  
+  color: white;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.copy {
+  font-size: 18px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  a {
+    display: block;
+    margin-left: 20px;
+  }
+
+  svg {
+    display: block;
+    width: 30px;
+  }
+}

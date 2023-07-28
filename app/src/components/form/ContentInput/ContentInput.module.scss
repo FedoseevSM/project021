@@ -1,0 +1,104 @@
+.wrapper {
+  position: relative;
+}
+
+.actions {
+  display: flex;
+  position: absolute;
+  top: -30px;
+  left: -1px;
+  width: 160px;
+  display: none;
+}
+
+.actions div {
+  flex-basis: 32px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  height: 24px;
+  text-align: center;
+  // background-color: $ui-01;
+  
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  &:hover {
+    // background-color: $interactive-01;
+    color: white;
+  }
+}
+
+.selected {
+  // background-color: $interactive-01 !important;
+  color: white;
+}
+
+.italicAction {
+  font-style: italic;
+}
+
+.boldAction {
+  font-weight: bold;
+}
+
+.h1Action {
+ 
+}
+
+.h2Action {
+
+}
+
+.h3Action {
+
+}
+
+.input {
+  // background-color: $ui-01;
+  margin: 8px 0;
+  min-height: 40px;
+  padding: 10px 30px 10px 10px;
+  font-size: 16px;
+  word-break: break-word;
+}
+
+.input:empty::before {
+  content: attr(placeholder);
+  // color: $ui-03;
+  font-style: italic;
+}
+
+.input:empty:focus::before {
+  content: "";
+}
+
+.content {
+  i, em {
+    font-style: italic;
+  }
+  b, strong {
+    font-weight: bold;
+  }
+
+  p, div {
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 1.6em;
+    font-weight: 600;
+  }
+  h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+  &:focus ~ .actions {
+    display: flex;
+  }
+}

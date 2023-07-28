@@ -1,0 +1,163 @@
+@import '~vars.css';
+
+body.disabled {
+  overflow: hidden;
+}
+
+
+.ce-block__content {
+  border: none !important;
+  border: none !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+  word-break: break-word;
+  position: relative;
+  font-size: 16px;
+  max-width: 100%;
+}
+
+.ce-toolbar__content {
+  max-width: 100%;
+}
+
+
+.content {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 150px;
+  box-sizing: border-box;
+}
+
+.ce-paragraph a {
+  color: var(--blue-color);
+}
+
+.tooltip {
+  background: rgba(255, 255, 255, 0.7);;
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 300;
+  font-size: 12px;
+  color: #000000;
+  border-radius: 5px;
+}
+
+
+.hidden {
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  min-height: 0 !important;
+  border: none !important;
+}
+
+@media only screen and (max-width: 1920px) {
+  .content {
+    padding: 0 50px;
+  }  
+}
+
+
+@media only screen and (max-width: 799px) {
+  .content {
+    padding: 0 12px;
+  }  
+}
+
+
+.button {
+  font-weight: 500;
+  font-size: 18px;
+  border: none;
+  min-width: 143px;
+  text-align: center;
+  color: white;
+  height: 34px;
+  border-radius: 5px;
+  cursor: pointer;
+  &:disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
+}
+
+.button-primary {
+  background: #88CAF7;
+  &:not(:disabled):hover {
+    background: #71B2EC;
+  }
+}
+
+.button-secondary {
+  background: #C4C4C4;
+  &:not(:disabled):hover {
+    background: #A9A9A9;
+  }
+}
+
+.button-danger {
+  background: #E10000;
+  &:not(:disabled):hover {
+    background: #A40000;
+  }
+}
+
+.codex-editor__redactor {
+  padding-bottom: 20px !important;
+}
+
+h1.ce-header {
+  font-size: 1.8em;
+  font-weight: 500;
+}
+
+h2.ce-header {
+  font-size: 1.6em;
+  font-weight: 500;
+}
+
+h3.ce-header {
+  font-size: 1.4em;
+  font-weight: 500;
+}
+
+h4.ce-header {
+  font-size: 1.3em;
+  font-weight: 500;
+}
+
+h5.ce-header {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+h6.ce-header {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.spinner {
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border: .5rem solid #88CAF7;
+  border-top-color: transparent;
+  animation: spin 1s infinite linear;
+  margin: 40px auto;
+}
+
+.overlay-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

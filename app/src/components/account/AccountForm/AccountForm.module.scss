@@ -1,0 +1,145 @@
+@import '~vars.css';
+
+.wrapper {
+  max-width: 800px;
+  padding: 94px 20px 0;
+  margin: 0 auto;
+}
+
+.title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+}
+.form {
+  margin-top: 33px;
+}
+
+.cover {
+  position: relative;
+  margin-bottom: 20px;
+  img {
+    display: block;
+    max-width: 80%;
+    margin-bottom: 8px;
+  }
+}
+
+.addLink {
+  margin-top: 4px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  svg {
+    cursor: pointer;
+    &:hover {
+      color: var(--blue-color);
+    }
+  }
+}
+
+.imageError {
+  color: var(--red-color);
+  font-size: 12px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px 0;
+  button {
+    margin-right: 16px;
+  }
+}
+
+.listTitle {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.list {
+  padding: 8px 0 4px;
+}
+
+.listItem {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--blue-color);
+  margin-right: 4px;
+  margin-bottom: 4px;
+  span {
+    padding: 4px 8px;
+  }
+  svg {
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+    cursor: pointer;
+    &:hover {
+      color: var(--blue-color);
+    }
+  }
+}
+
+.listForm {
+  display: flex;
+  align-items: center;
+  button {
+    margin-left: 28px;
+  }
+}
+
+.imageDrop {
+  margin-top: 40px;
+  font-weight: normal;
+  font-size: 20px;
+  border: 1px solid #C4C4C4;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 189px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  &:hover {
+    color: var(--blue-color);
+    cursor: pointer;
+  }
+}
+
+.activeImageDrop {
+  background: #C4C4C4;
+}
+
+.rejectImageDrop {
+  color: var(--red-color)
+}
+
+.image {
+  position: relative;
+  margin-top: 40px;
+  img {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
+
+@media only screen and (max-width: 1023px) {
+  .listForm {
+    display: block;
+    button {
+      margin-left: 0;
+      margin-top: 12px;
+      width: 100%;
+    }
+    input {
+      width: 100%;
+    }
+  }
+}

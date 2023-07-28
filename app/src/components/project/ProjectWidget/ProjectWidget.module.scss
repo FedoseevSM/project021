@@ -1,0 +1,129 @@
+@import '~vars.css';
+
+.wrapper {
+  position: relative;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  padding-bottom: 10px;
+  &:hover {
+    background: #EAF5FE;
+    .cover {
+      border-color: var(--blue-color);
+    }
+  }
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    // color: $ui-04;
+  }
+}
+
+.name {
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 10px;
+  padding: 0 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.text {
+  font-size: 14px;
+  margin-top: 12px;
+  line-height: 16px;
+  padding: 0 12px;
+}
+
+.cover {
+  position: relative;
+  height: 184px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom: none;
+}
+
+.cover img {
+  
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 38px;
+  padding: 0 12px;
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  &:hover {
+    color: var(--blue-color);
+  }
+  & span {
+    margin-left: 10px;
+  }
+}
+
+.liked {
+  color: var(--blue-color);
+}
+
+.values {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+  & span {
+    font-size: 14px;
+    font-weight: 300;
+    margin-left: 7px;
+  }
+  &:not(:first-child) {
+    margin-left: 23px;
+  }
+}
+
+.created {
+  font-weight: 300;
+  font-size: 12px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .name {
+    font-size: 20px;
+    margin-top: 12px;
+  }
+  .cover {
+    height: 200px;
+  }
+  .text {
+    font-size: 16px;
+    margin-top: 12px;
+  }
+}

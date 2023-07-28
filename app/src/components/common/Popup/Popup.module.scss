@@ -1,0 +1,48 @@
+@import '~vars.css';
+
+.wrapper {
+  position: fixed;
+  max-width: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
+  padding: 24px;
+  box-sizing: border-box;
+  background: white;
+  max-height: 100vh;
+  overflow: auto;
+  width: 100%;
+}
+
+.overlay {
+  z-index: 1950;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  color: black;
+}
+
+.content {
+  margin-top: 8px; 
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+  color: black;
+  &:hover {
+    color: var(--blue-color);
+  }
+}

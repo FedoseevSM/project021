@@ -1,0 +1,20 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.input {
+  width: 100px;
+}
+
+.hideInvalidText :global .bx--form-requirement {
+  display: none !important;
+}
+
+.fullWidth {
+  display: flex;
+  max-width: 600px;
+  input {
+    width: 100%;
+  }
+}

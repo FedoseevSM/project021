@@ -1,0 +1,168 @@
+@import '~vars.css';
+
+.top {
+  
+}
+
+.image {
+  margin-top: 20px;
+}
+
+.inputName {
+  font-weight: 600;
+}
+
+.row {
+  // margin-bottom: 8px;
+}
+
+.input {
+  // flex-basis: 100%;
+  // border: none;
+  // padding: 0;
+  font-size: 24px;
+  // margin-bottom: 20px;
+  // background: none;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    font-style: italic;
+  }
+}
+
+.description {
+  font-size: 20px;
+}
+
+.upload {
+  width: 100%;
+}
+
+.imageRow {
+  height: 160px;
+}
+.imageRow :global .bx--file-browse-btn {
+  max-width: 100%;
+}
+
+.imageRowError :global .bx--file__drop-container {
+  // color: $danger;
+}
+
+.imageError {
+  color: var(--red-color);
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 5px;
+}
+
+.editor {
+  margin: 36px 0;
+}
+.imageDrop {
+  margin-top: 40px;
+  font-weight: normal;
+  font-size: 20px;
+  border: 1px solid #C4C4C4;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 189px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  &:hover {
+    color: var(--blue-color);
+    cursor: pointer;
+  }
+}
+
+.activeImageDrop {
+  background: #C4C4C4;
+}
+
+.rejectImageDrop {
+  color: var(--red-color)
+}
+
+.image {
+  position: relative;
+  margin-top: 40px;
+  img {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.actionsRight {
+  display: flex;
+  align-items: center;
+  button {
+    margin-left: 31px;
+  }
+}
+
+.actionsLeft {
+  display: flex;
+  align-items: center;
+  button {
+    margin-right: 20px;
+  }
+}
+
+.public {
+  display: flex;
+  align-items: center;
+  & span:first-child {
+    color:  rgba(0, 0, 0, 0.5);
+  }
+  & span:last-child {
+    font-weight: 300;
+    font-size: 14px;
+  }
+  
+}
+
+.typesList {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -12px;
+  & > div {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+}
+
+.typesTitle {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 23px;
+  margin-bottom: 4px;
+}
+
+@media only screen and (max-width: 799px) {
+  .actions {
+    display: block;
+  }
+  .actionsLeft {
+    button {
+      margin-right: 8px;
+    }
+  }
+  .actionsRight {
+    margin-top: 12px;
+    button {
+      margin-left: 0;
+      margin-right: 16px;
+    }
+  }
+}

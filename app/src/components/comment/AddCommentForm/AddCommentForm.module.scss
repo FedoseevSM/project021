@@ -1,0 +1,60 @@
+@import '~vars.css';
+
+.wrapper {
+  position: relative;
+  padding-top: 20px;
+  flex: 1;
+}
+
+.title {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+  word-break: break-word;
+}
+
+
+.guest {
+  padding: 12px 8px;
+  font-size: 16px;
+  // color: $ui-04;
+  span {
+    cursor: pointer;
+    text-decoration: underline;
+    &:hover {
+      color: var(--blue-color);
+    }
+  }
+}
+.field {
+  margin-bottom: 8px;
+}
+
+.errors {
+  margin-bottom: 8px;
+}
+.error {
+  color: var(--red-color);
+  padding: 4px 0;
+  
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  button {
+    margin-right: 12px;
+  }
+}
+
+.anonymous {
+  display: flex;
+  align-items: center;
+  & span:first-child {
+    color:  rgba(0, 0, 0, 0.5);
+  }
+  & span:last-child {
+    font-weight: 300;
+    font-size: 14px;
+  }
+}

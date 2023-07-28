@@ -1,0 +1,28 @@
+@import '~vars.css';
+
+.field {
+  min-height: 100px;  
+  
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, .1);
+}
+
+:global(.codex-editor__redactor) {
+  // border: 1px solid $ui-01;
+  padding: 0 12px;
+}
+
+.error {
+  color: var(--red-color);
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  top: calc(100% + 8px);
+  position: absolute;
+  left: 0;
+}
+
+.errorField trix-editor {
+  // outline: 2px solid $danger;
+  outline-offset: -2px;
+}

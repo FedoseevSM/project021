@@ -1,0 +1,175 @@
+@import '~vars.css';
+.wrapper {
+  min-height: 100px;
+  margin-top: 98px;
+}
+
+.spinner {
+  margin: 0 auto;
+}
+
+.guest {
+  background: var(--blue-color);
+  color: white;
+}
+
+.guestInner {
+  padding-top: 65px;
+  padding-bottom: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.guestImage {
+  position: relative;
+  width: 404px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  img {
+    max-width: 100%;
+  }
+}
+
+.guestContent {
+  flex-basis: 100%;
+  margin: 0 30px;
+}
+
+.guestName {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 52px;
+}
+
+.guestDesc {
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 39px;
+  margin-top: 62px;
+}
+
+.guestAction {
+  width: 397px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  button {
+    width: 397px;
+    cursor: pointer;
+    color: white;
+    background: #71B2EC;
+    border: none;
+    border-radius: 8px;
+    height: 89px;
+    font-weight: bold;
+    font-size: 40px;
+    &:hover {
+      background: #71B2EC;
+    }
+  }
+}
+
+.content {
+  padding-top: 89px;
+  padding-bottom: 89px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.navigation {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 23px;
+  margin-bottom: 30px;
+  span {
+    cursor: pointer;
+  }
+  i {
+    margin: 0 .3em;
+  }
+  .active {
+    font-weight: 500;
+    color: #1750BE;
+  }
+}
+
+@media only screen and (max-width: 1920px) {
+  .guestImage {
+    width: 320px;
+  }
+
+  .guestAction {
+    width: 280px;
+    button {
+      width: 280px;
+      font-size: 30px;
+      height: 60px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .guestImage {
+    width: 180px;
+  }
+
+  .guestAction {
+    width: 200px;
+    button {
+      width: 200px;
+      font-size: 20px;
+      height: 55px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .guestInner {
+    display: block;
+  }
+  .guestImage {
+    width: 100%;
+    text-align: center;
+    
+  }
+
+  .guestName {
+    font-size: 32px;
+    line-height: 1.2;
+    margin-top: 20px;
+  }
+
+  .guestDesc {
+    font-size: 24px;
+    line-height: 1.2;
+    margin-top: 20px;
+  }
+
+  .guestAction {
+    display: none;
+  }
+
+  .guestInner {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .content {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .navigation {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    i {
+      margin: 0 .2em;
+    }
+  }
+}

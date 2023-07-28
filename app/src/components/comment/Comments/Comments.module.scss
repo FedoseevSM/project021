@@ -1,0 +1,75 @@
+@import '~vars.css';
+
+.wrapper {
+  position: relative;
+  margin: 30px auto;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+.list {
+  margin-top: 12px;
+}
+
+.comment {
+  margin-top: 10px;
+}
+
+.empty {
+  padding: 4px 0;
+  font-size: 16px;
+}
+
+.addCommentIcon {
+  margin-left: 12px;
+  span {
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  svg {
+    margin-right: 4px;
+  }
+}
+
+.spinner {
+  margin: 50px auto;
+}
+
+.reply {
+  cursor: pointer;
+  // color: $interactive-01;
+  text-decoration: underline;
+  font-size: 18px;
+  margin-top: 20px;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.hideNegative {
+  display: flex;
+  align-items: center;
+  & span:first-child {
+    color:  rgba(0, 0, 0, 0.5);
+  }
+  & span:last-child {
+    font-weight: 300;
+    font-size: 14px;
+  }
+}
+
+.addComment {
+  color: #1750BE;
+}
