@@ -88,7 +88,7 @@ export default function LoginForm({ onSave, onClose }: IProps) {
             {error && <div className={s.error}>{error}</div>}
             <div className={s.bottom}>
 
-              <SocialAuth />
+              {/* <SocialAuth /> */}
               <div className={s.links}>
                 <div className={s.link}>
                   <span
