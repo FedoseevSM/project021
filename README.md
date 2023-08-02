@@ -42,3 +42,6 @@
 
     docker-compose up
     
+Запуск уже собранного контейнера после остановки
+
+    docker run -it --rm -d -p 80:80 --name project021-app project021-app
