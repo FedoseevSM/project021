@@ -41,7 +41,15 @@
 **Порт:** 80
 
     docker-compose up
+
+Пересобрать образ
+
+    docker-compose up --build
     
-Запуск уже собранного образа после остановки контейнера
+Создание контейнера на основе уже собранного образа
 
     docker run -it --rm -d -p 80:80 --name CONTAINER_NAME project021-app
+
+Запуск ранее созданного контейнера
+
+    docker start CONTAINER_NAME
