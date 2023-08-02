@@ -50,6 +50,18 @@
 
     docker run -it --rm -d -p 80:80 --name CONTAINER_NAME project021-app
 
-Запуск ранее созданного контейнера
+Остановить все контейнеры
 
-    docker start CONTAINER_NAME
+    docker stop $(docker ps -a -q)
+
+Остановить один контейнер
+
+    docker stop CONTAINER_NAME
+
+Удалить все контейнеры
+
+    docker rm $(docker ps -a -q)
+
+Удалить один контейнер
+
+    docker rm CONTAINER_NAME
