@@ -5,9 +5,8 @@ import { Helmet } from 'react-helmet';
 import * as SignalR from '@microsoft/signalr';
 
 import { UserActionType } from 'store';
-// import { refreshToken } from 'api/request';
-// import { getAccount, getEvents } from 'api/user';
-// import { getEvents } from 'api/user';
+import { refreshToken } from 'api/request';
+import { getAccount, getEvents } from 'api/user';
 import { User } from 'models/user';
 import useUser from 'hooks/useUser';
 import { useHistory } from 'react-router-dom';
@@ -27,7 +26,7 @@ import ProjectDetail from 'components/project/ProjectDetail/ProjectDetail';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import UserPage from 'components/common/UserPage/UserPage';
 import ResetPassword from 'components/auth/ResetPassword/ResetPassword';
-// import { connectWS, disconnectWS } from 'api/hub';
+import { connectWS, disconnectWS } from 'api/hub';
 import Agreement from 'components/Agreement/Agreement';
 import Search from 'components/Search/Search';
 import ContentField from 'components/form/ContentField/ContentField';
@@ -46,12 +45,12 @@ function App() {
     () => {
       const onLoad = async () => {
         try {
-          // await refreshToken();
-          // const { data } = await getAccount();
-          // dispatch({ 
-          //   type: UserActionType.LOAD_USER_ACTION, 
-          //   payload: User.FromResponse(data),
-          // });
+          await refreshToken();
+          const { data } = await getAccount();
+          dispatch({ 
+            type: UserActionType.LOAD_USER_ACTION, 
+            payload: User.FromResponse(data),
+          });
           dispatch({ type: UserActionType.LOGIN_VISIBILITY_ACTION, payload: false });
         } catch (err) {
           if (window.opener) {
@@ -84,42 +83,42 @@ function App() {
 
   const loadEvents = useCallback(
     async () => {
-      // const { data } = await getEvents();
-      // dispatch({
-      //   type: UserActionType.EVENTS_LOADED_ACTION,
-      //   payload: data.map((d: string) => JSON.parse(d)),
-      // });
+      const { data } = await getEvents();
+      dispatch({
+        type: UserActionType.EVENTS_LOADED_ACTION,
+        payload: data.map((d: string) => JSON.parse(d)),
+      });
     },
     [],
   );
 
-  // useEffect(
-  //   () => {
-  //     let expired = false;
-  //     let init = false;
-  //     let connection:  any;
-  //     const onLoad = async () => {
-  //       connection = await connectWS(user ? user.id : undefined);
-  //       init = true;
-  //       if (expired) {
-  //         disconnectWS();
-  //       } else if (connection) {
-  //         connection.on('NewEvent', loadEvents);
-  //       }
-  //     }
-  //     onLoad();
-  //     return () => {
-  //       if (init) {
-  //         disconnectWS();
-  //         if (connection) {
-  //           connection.off('NewEvent', loadEvents);
-  //         }
-  //       }
-  //       expired = true;
-  //     }
-  //   },
-  //   [user],
-  // );
+  useEffect(
+    () => {
+      let expired = false;
+      let init = false;
+      let connection:  any;
+      const onLoad = async () => {
+        connection = await connectWS(user ? user.id : undefined);
+        init = true;
+        if (expired) {
+          disconnectWS();
+        } else if (connection) {
+          connection.on('NewEvent', loadEvents);
+        }
+      }
+      onLoad();
+      return () => {
+        if (init) {
+          disconnectWS();
+          if (connection) {
+            connection.off('NewEvent', loadEvents);
+          }
+        }
+        expired = true;
+      }
+    },
+    [user],
+  );
 
   
 

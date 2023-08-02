@@ -1,6 +1,3 @@
-/**
- * Нельзя писать типы any для продакшена.
- */
 export const fbCodeListeners: any = [];
 
 (window as any).setFbCode = function(code: string) {

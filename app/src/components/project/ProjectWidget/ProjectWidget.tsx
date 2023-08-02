@@ -18,7 +18,7 @@ interface IProps {
 export default function ProjectWidget({ project, className, onLike }: IProps) {
   return (
     <div className={cx(s.wrapper, { [className!]: !!className })}>
-      {/* <Link className={s.link} to={`/project/${project.id}`}>
+      <Link className={s.link} to={`/project/${project.id}`}>
         <div className={s.cover} style={{ backgroundImage: `url(${staticBase}/${project.cover.startsWith('images/') ? project.cover : `images/${project.cover}`})` }} />
         <div title={s.name} className={s.name}>{project.name}{project.draft ? ' (unpublished)' : ''}</div>
         <div className={s.text}>{project.description.substring(0, 300)}{project.description.length > 300 && '...'}</div>
@@ -48,7 +48,7 @@ export default function ProjectWidget({ project, className, onLike }: IProps) {
             {moment.utc(project.created).local().format('DD.MM.YYYY')}
           </div>
         </div>
-      </Link> */}
+      </Link>
     </div>
   )
 }

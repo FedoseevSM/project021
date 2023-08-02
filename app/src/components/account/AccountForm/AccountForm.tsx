@@ -5,7 +5,7 @@ import validator from 'validator';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, UserActionType } from 'store';
 import FormRow from 'components/form/FormRow/FormRow';
-// import { getUserInfo, updateUserInfo } from 'api/user';
+import { getUserInfo, updateUserInfo } from 'api/user';
 import useUser from 'hooks/useUser';
 import { User } from 'models/user';
 import { staticBase } from 'helpers/constants';
@@ -71,8 +71,8 @@ export default function AccountForm({ onBack }: IProps) {
       setIsLoading(true);
       const onLoad = async () => {
         try {
-          // const { data: payload } = await getUserInfo();
-          // dispatch({ type: UserActionType.LOAD_USER_INFO_ACTION, payload });
+          const { data: payload } = await getUserInfo();
+          dispatch({ type: UserActionType.LOAD_USER_INFO_ACTION, payload });
         } catch(err) {
           history.replace('/');
         }
@@ -143,20 +143,20 @@ export default function AccountForm({ onBack }: IProps) {
       setUpdated(false);
       try {
         
-      //   const { data: { account, info } } = await updateUserInfo({ name, login, city, education, tags, skills, links, cover: coverPath, coverFile: cover });
-      //   dispatch({ 
-      //     type: UserActionType.LOAD_USER_ACTION, 
-      //     payload: User.FromResponse(account),
-      //   });
-      //   dispatch({ 
-      //     type: UserActionType.LOAD_USER_INFO_ACTION, 
-      //     payload: info, 
-      // });
+        const { data: { account, info } } = await updateUserInfo({ name, login, city, education, tags, skills, links, cover: coverPath, coverFile: cover });
+        dispatch({ 
+          type: UserActionType.LOAD_USER_ACTION, 
+          payload: User.FromResponse(account),
+        });
+        dispatch({ 
+          type: UserActionType.LOAD_USER_INFO_ACTION, 
+          payload: info, 
+      });
       onBack();
       setUpdated(true);
       } catch (err) {
         console.error(err);
-        // setErrors(JSON.parse(err.data.message));
+        setErrors(JSON.parse(err.data.message));
       }
       setIsLoading(false);
     }

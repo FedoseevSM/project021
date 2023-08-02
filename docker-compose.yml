@@ -1,7 +1,61 @@
 version: '3'
 services:
-  app:
-    container_name: project021
-    build: ./app
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/proxy.conf:/etc/nginx/proxy.conf:ro
+      - ./nginx/logs/:/var/log/nginx/
+      - ./api/wwwroot:/static
+      - ./build/static/css:/static/css
+      - ./build/static/js:/static/js
+      - ./build:/app
+      - ./bundle.crt:/etc/bundle.crt
+      - ./certificate.key:/etc/certificate.key
+
     ports:
-      - 80:80
+      - '80:80'
+      - '443:443'
+    links:
+      - api
+    restart: always
+
+  api:
+    build: ./api
+    links:
+      - db
+      - events_db
+    env_file:
+      - .env
+    volumes:
+      - ./api/wwwroot:/app/wwwroot
+      - ./api/logs:/app/logs
+    restart: always
+
+  db:
+    image: postgres
+    env_file:
+      - .env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: "10"
+    ports:
+      - '5432:5432'
+    # volumes:
+    #   - ./data:/var/lib/postgresql
+
+  events_db:
+    image: mongo
+    env_file:
+      - .env
+    ports:
+      - '27017-27019:27017-27019'
+  app:
+    build: ./app
+    volumes:
+      - ./app:/app
+      - ./build:/build
+    env_file:
+      - .env

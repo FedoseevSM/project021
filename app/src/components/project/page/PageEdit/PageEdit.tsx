@@ -42,79 +42,79 @@ export default function PageEdit() {
   const [draftContent, setDraftContent] = useState<any>(null);
   const [popupMessage, setPopupMessage] = useState('');
 
-  // const isAdmin = user !== null && user?.user_id === project!.user.user_id;
-  // const hasRights = user !== null && (user.user_id === project!.user.user_id) || (projectUsers && projectUsers.users.filter((u: any) => u.user_id === user?.user_id) !== -1);
+  const isAdmin = user !== null && user.id === project!.user.id;
+  const hasRights = user !== null && (user.id === project!.user.id || (projectUsers && projectUsers.users.findIndex((u: any) => u.id === user.id) !== -1));
 
-  // useEffect(
-  //   () => {
-  //     if (!page) return;
-      // if (!hasRights) {
-      //   history.replace(`/project/${project!.id}/${page!.id}`);
-      //   return;
-      // }
-  //     setName(page.name || '');
-  //     setImportant(!!page.important);
-  //     setPublished(!page.draft);
-  //     setFiles(page.files || []);
-  //     try {
-  //       setData(JSON.parse(page.data || '{}'));
-  //     } catch(err) {
-  //       setData({});
-  //     }
+  useEffect(
+    () => {
+      if (!page) return;
+      if (!hasRights) {
+        history.replace(`/project/${project!.id}/${page!.id}`);
+        return;
+      }
+      setName(page.name || '');
+      setImportant(!!page.important);
+      setPublished(!page.draft);
+      setFiles(page.files || []);
+      try {
+        setData(JSON.parse(page.data || '{}'));
+      } catch(err) {
+        setData({});
+      }
       
-  //     setContent(page.content || '');
-  //   },
-  //   [page, user, hasRights], // eslint-disable-line
-  // );
+      setContent(page.content || '');
+    },
+    [page, user, hasRights], // eslint-disable-line
+  );
 
-  // useEffect(
-  //   () => {
-  //     if (!project || !page) {
-  //       return;
-  //     }
-  //     const onLoad = async () => {
-  //       const { data: { drafts }} = (await getDraft(project.id, page.id)) as any;
-  //       if (drafts.length) {
-  //         setDraftContent(drafts[0].content || '');
-  //       } else {
-  //         setDraftContent('');
-  //       }
-  //     }
-  //     if (displayDraft) {
-  //       onLoad();
-  //     } else {
-  //       setDraftContent(null);
-  //     }
-  //   },
-  //   [displayDraft, project, page]
-  // );
+  useEffect(
+    () => {
+      if (!project || !page) {
+        return;
+      }
+      const onLoad = async () => {
+        const { data: { drafts }} = (await getDraft(project.id, page.id)) as any;
+        if (drafts.length) {
+          setDraftContent(drafts[0].content || '');
+        } else {
+          setDraftContent('');
+        }
+      }
+      if (displayDraft) {
+        onLoad();
+      } else {
+        setDraftContent(null);
+      }
+    },
+    [displayDraft, project, page]
+  );
 
-  // useEffect(
-  //   () => {
-  //     if (page && isAdmin) {
-  //       const handler = async (content: string) => {
-  //         setPopupMessage('Страница обновлена');
-  //       };
-  //       let expired = false;
-  //       let connection: SignalR.HubConnection | undefined;
-  //       const onLoad = async () => {
-  //         connection = await getConnectionWS();
-  //         if (!expired && connection) {
-  //           connection.on(`PageEdit:${page.id}`, handler);
-  //         }
-  //       }
-  //       onLoad();
-  //       return () => {
-  //         expired = true;
-  //         if (connection) {
-  //           connection.off(`PageEdit:${page.id}`, handler);
-  //           connection = undefined;
-  //         }
-  //       }
-  //     }
-  //   },
-  //   [page, isAdmin]
-  // );
+  useEffect(
+    () => {
+      if (page && isAdmin) {
+        const handler = async (content: string) => {
+          setPopupMessage('Страница обновлена');
+        };
+        let expired = false;
+        let connection: SignalR.HubConnection | undefined;
+        const onLoad = async () => {
+          connection = await getConnectionWS();
+          if (!expired && connection) {
+            connection.on(`PageEdit:${page.id}`, handler);
+          }
+        }
+        onLoad();
+        return () => {
+          expired = true;
+          if (connection) {
+            connection.off(`PageEdit:${page.id}`, handler);
+            connection = undefined;
+          }
+        }
+      }
+    },
+    [page, isAdmin]
+  );
 
   const { 
     acceptedFiles, getRootProps, getInputProps, isDragAccept, isDragReject,
@@ -156,11 +156,11 @@ export default function PageEdit() {
     if (Object.keys(errors).length === 0) {
       setIsLoading(true);
       try {
-        // const { data } = await updatePage({ ...page!, name, content: content || '', files, important, draft: !published }, dt, newFiles);
-        // const { data: pages } = await getProjectPages(project!.id);
-        // dispatch({ type: ProjectActionType.LOAD_PROJECT_ACTION, payload: { ...project, pages }});
-        // history.push(`/project/${project!.id}/${page!.id}`);
-        // dispatch({ type: ProjectActionType.LOAD_PAGE_ACTION, payload: data });          
+        const { data } = await updatePage({ ...page!, name, content: content || '', files, important, draft: !published }, dt, newFiles);
+        const { data: pages } = await getProjectPages(project!.id);
+        dispatch({ type: ProjectActionType.LOAD_PROJECT_ACTION, payload: { ...project, pages }});
+        history.push(`/project/${project!.id}/${page!.id}`);
+        dispatch({ type: ProjectActionType.LOAD_PAGE_ACTION, payload: data });          
       } catch (err) {
         console.error(err);
       }
@@ -176,7 +176,7 @@ export default function PageEdit() {
   
   return (
     <div className={s.wrapper}>
-      {/* <div className={s.checkboxes}>
+      <div className={s.checkboxes}>
         <div className={s.checkbox}>
           <Checkbox
             checked={important}
@@ -329,7 +329,7 @@ export default function PageEdit() {
       )}
       {popupMessage && (
         <Popup title={popupMessage} width={320} onClose={() => setPopupMessage('')} />
-      )} */}
+      )}
     </div>
   );
 }

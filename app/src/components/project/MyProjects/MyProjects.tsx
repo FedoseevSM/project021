@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState, ProjectActionType } from 'store';
 import ProjectsList from 'components/project/ProjectsList/ProjectsList';
 import Page from 'components/common/Page/Page';
-// import { getMyProjects, likeProject } from 'api/project';
+import { getMyProjects, likeProject } from 'api/project';
 import useUser from 'hooks/useUser';
 import { Helmet } from 'react-helmet';
 import { UserActionType } from 'store';
@@ -51,9 +51,9 @@ export default function MyProjects() {
       const onLoad = async () => {
         setProjectLoaded(false);
         try {
-          // request = getMyProjects(typeIndex, index, page);
-          // const { data } = await request;
-          // dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: data });
+          request = getMyProjects(typeIndex, index, page);
+          const { data } = await request;
+          dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: data });
         } catch(err) {
           console.error(err);
           dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: [] });
@@ -123,10 +123,10 @@ export default function MyProjects() {
             disabled={moreLoading}
             onMoreLoad={async () => {
               try {
-                // setMoreLoading(true);
-                // const { data } = await getMyProjects(typeIndex, index, page + 1);
-                // setPage(page + 1);
-                // dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: [...projects, ...data] });
+                setMoreLoading(true);
+                const { data } = await getMyProjects(typeIndex, index, page + 1);
+                setPage(page + 1);
+                dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: [...projects, ...data] });
               } catch(err) {
                 console.error(err);
               }
@@ -138,10 +138,11 @@ export default function MyProjects() {
                 return;
               }
               try {
-                // const { data: { count, liked } } = await likeProject(project.id);
-                // const index = projects.indexOf(project);
-                // projects[index] = { ...project, likesCount: count, liked };
-                // dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: [...projects] });
+                const { data: { count, liked } } = await likeProject(project.id);
+                const index = projects.indexOf(project);
+                projects[index] = { ...project, likesCount: count, liked };
+                dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: [...projects] });
+                
               } catch(err) {
 
               }

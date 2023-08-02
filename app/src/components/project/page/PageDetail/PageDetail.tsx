@@ -17,26 +17,26 @@ export default function PageDetail() {
   const dispatch = useDispatch();
   const { project, page, projectUsers } = useSelector((s: AppState) => s.project);
 
-  // useEffect(
-  //   () => {
-  //     const onLoad = async () => {
-  //       setIsLoading(true);
-  //       try {
-  //         const { data } = await getPage(project?.project_id, +pageId);
-  //         dispatch({ type: ProjectActionType.LOAD_PAGE_ACTION, payload: data });          
-  //         setIsLoading(false);
-  //       } catch (err) {
-  //         console.error(err);
-  //         history.replace(`/project/${project!.project_id}`);
-  //       }
-  //     };
-  //     onLoad();
-  //     return () => {
-  //       dispatch({ type: ProjectActionType.LOAD_PAGE_ACTION, payload: null });
-  //     }
-  //   },
-  //   [pageId]
-  // );
+  useEffect(
+    () => {
+      const onLoad = async () => {
+        setIsLoading(true);
+        try {
+          const { data } = await getPage(project!.id, +pageId);
+          dispatch({ type: ProjectActionType.LOAD_PAGE_ACTION, payload: data });          
+          setIsLoading(false);
+        } catch (err) {
+          console.error(err);
+          history.replace(`/project/${project!.id}`);
+        }
+      };
+      onLoad();
+      return () => {
+        dispatch({ type: ProjectActionType.LOAD_PAGE_ACTION, payload: null });
+      }
+    },
+    [pageId]
+  );
 
   if (isLoading || projectUsers === null) {
     return null;
@@ -46,8 +46,7 @@ export default function PageDetail() {
     <>
       {page && (
         <Helmet>
-          {/* <title>Projects & protocols repository: {project!.name} - {page.name}</title> */}
-          <title>Projects & protocols repository: {project!.project_id}</title>
+          <title>Projects & protocols repository: {project!.name} - {page.name}</title>
         </Helmet>
       )}
       <Switch>

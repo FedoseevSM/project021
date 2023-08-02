@@ -32,7 +32,7 @@ export default function ProjectMain() {
   const { user } = useUser();
   const dispatch = useDispatch();
   const history = useHistory();
-  const isAdmin = !!(user && (user.user_id === project!.user_id  || user.isAdmin));
+  const isAdmin = !!(user && (user.id === project!.user.id  || user.isAdmin));
   const [usersShowed, setUsersShowed] = useState(false);
 
   const [usersIndex, setUsersIndex] = useState(0);
@@ -89,58 +89,58 @@ export default function ProjectMain() {
 
   const follow = useCallback(
     async () => {
-      // await toggleProjectFollowing(project!.id, true);
-      // dispatch({ 
-      //   type: ProjectActionType.LOAD_PROJECT_ACTION, 
-      //   payload: { ...project, following: true }
-      // });
-      // setUsers({ ...users, followers: [user!, ...users.followers]})
+      await toggleProjectFollowing(project!.id, true);
+      dispatch({ 
+        type: ProjectActionType.LOAD_PROJECT_ACTION, 
+        payload: { ...project, following: true }
+      });
+      setUsers({ ...users, followers: [user!, ...users.followers]})
     },
     [project, users, user]
   );
 
   const unFollow = useCallback(
     async () => {
-      // await toggleProjectFollowing(project!.id, false);
-      // dispatch({ 
-      //   type: ProjectActionType.LOAD_PROJECT_ACTION, 
-      //   payload: { ...project, following: false }
-      // });
-      // setUsers({ ...users, followers: users.followers.filter((u: any) => user!.user_id !== u.user_id)})
+      await toggleProjectFollowing(project!.id, false);
+      dispatch({ 
+        type: ProjectActionType.LOAD_PROJECT_ACTION, 
+        payload: { ...project, following: false }
+      });
+      setUsers({ ...users, followers: users.followers.filter((u: any) => user!.id !== u.id)})
     },
     [project, users, user]
   );
 
   const request = useCallback(
     async () => {
-      // await toggleProjectRequest(project!.id, true);
-      // dispatch({ 
-      //   type: ProjectActionType.LOAD_PROJECT_ACTION, 
-      //   payload: { ...project, requested: true }
-      // });
+      await toggleProjectRequest(project!.id, true);
+      dispatch({ 
+        type: ProjectActionType.LOAD_PROJECT_ACTION, 
+        payload: { ...project, requested: true }
+      });
     },
     [project]
   );
 
   const cancelRequest = useCallback(
     async () => {
-      // await toggleProjectRequest(project!.id, false);
-      // dispatch({ 
-      //   type: ProjectActionType.LOAD_PROJECT_ACTION, 
-      //   payload: { ...project, requested: false }
-      // });
+      await toggleProjectRequest(project!.id, false);
+      dispatch({ 
+        type: ProjectActionType.LOAD_PROJECT_ACTION, 
+        payload: { ...project, requested: false }
+      });
     },
     [project]
   );
 
   const leave = useCallback(
     async () => {
-      // await leaveProject(project!.id);
-      // dispatch({ 
-      //   type: ProjectActionType.LOAD_PROJECT_ACTION, 
-      //   payload: { ...project, participate: false }
-      // });
-      // setUsers({ ...users, users: users.users.filter((u: any) => user!.user_id !== u.user_id)})
+      await leaveProject(project!.id);
+      dispatch({ 
+        type: ProjectActionType.LOAD_PROJECT_ACTION, 
+        payload: { ...project, participate: false }
+      });
+      setUsers({ ...users, users: users.users.filter((u: any) => user!.id !== u.id)})
     },
     [project, users, user],
   );
@@ -165,30 +165,30 @@ export default function ProjectMain() {
       )}
       <div className={s.info}>          
         <div className={s.text}>
-          {/* <img 
+          <img 
             className={s.cover} 
             alt={project.name} 
             src={`${staticBase}/${project.cover.startsWith('images/') ? project.cover : `images/${project.cover}`}`} 
-          /> */}
+          />
           <div className={s.menu}>
             <StructureTree
               project={project}
               pages={pages}
               relative
-              canEdit={user !== null && (user.user_id === project.user_id || (projectUsers && projectUsers.users.filter((u: any) => u.user_id === user.user_id) !== -1))}
+              canEdit={user !== null && (user.id === project.user.id || (projectUsers && projectUsers.users.findIndex((u: any) => u.id === user.id) !== -1))}
               onAdd={async (id?: number) => {
-                // const { data: page } = await createPage(project.id, id);
-                // await dispatch({ 
-                //   type: ProjectActionType.LOAD_PROJECT_ACTION, 
-                //   payload: { ...project, pages: [...(project.pages || []), page] } 
-                // });
-                // history.push(`/project/${project.id}/${page.id}/edit`);
+                const { data: page } = await createPage(project.id, id);
+                await dispatch({ 
+                  type: ProjectActionType.LOAD_PROJECT_ACTION, 
+                  payload: { ...project, pages: [...(project.pages || []), page] } 
+                });
+                history.push(`/project/${project.id}/${page.id}/edit`);
               }}
             />
           </div>
           <div className={s.center}>
             <div className={s.likes}> 
-              {/* <div
+              <div
                 className={cx(s.likes, { [s.liked]: project.liked })}
                 onClick={async () => {
                   if (!user) {
@@ -210,12 +210,12 @@ export default function ProjectMain() {
                 <span>
                   {project.likesCount}
                 </span>
-              </div> */}
+              </div>
             </div>
             <div className={s.centerRight}>
               <div className={s.created}>{moment.utc(project.created).local().format('DD.MM.YYYY')}</div>
               {project.user && <div className={s.user}>
-                <Link to={`/users/${project.user.user_id}`} >{project.user.name}</Link>
+                <Link to={`/users/${project.user.id}`} >{project.user.name}</Link>
               </div>}
             </div>
           </div>
@@ -311,7 +311,7 @@ export default function ProjectMain() {
               </button>
             </div>
           </div>
-          {/* <div className={cx('text-content', s.text)} dangerouslySetInnerHTML={{ __html: content }} /> */}
+          <div className={cx('text-content', s.text)} dangerouslySetInnerHTML={{ __html: content }} />
           {importantPages.length > 0 && (
             <div className={s.important}>
               <div className={s.importantTitle}>Важные страницы:</div>
@@ -362,7 +362,7 @@ export default function ProjectMain() {
         </Modal>
       )} */}
       
-      {/* {usersShowed && (
+      {usersShowed && (
         <Popup width={500} onClose={() => setUsersShowed(false)}>
         <div className={s.popUpUserList}>
           <div className={s.usersTitle}>
@@ -384,8 +384,8 @@ export default function ProjectMain() {
                 >Заявки</span>
               </>
             )}
-          </div> */}
-          {/* {popupUsersIndex === 0 && (
+          </div>
+          {popupUsersIndex === 0 && (
             <div>
               {users.followers.length > 0 ? (
                   <div>
@@ -481,7 +481,7 @@ export default function ProjectMain() {
         </div>
         
       </Popup>
-      )} */}
+      )}
     </div>
   );
 }

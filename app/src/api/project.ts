@@ -2,58 +2,57 @@ import { request, authRequest } from 'api/request';
 import qs from 'query-string';
 import { IPage, IProject } from 'models/project';
 
-// export function getProjects(type: number, page?: number) {
-//   const params: { [key: string]: any } = {};
-//   params.type = type;
-//   if (page) {
-//     params.page = page;
-//   }
+export function getProjects(type: number, page?: number) {
+  const params: { [key: string]: any } = {};
+  params.type = type;
+  if (page) {
+    params.page = page;
+  }
   
-//   return request<any>(`projects?${qs.stringify(params)}`, 'get',);
-// }
+  return request<any>(`projects?${qs.stringify(params)}`, 'get',);
+}
 
-// export function searchProjects(q: string, page?: number) {
-//   const params: { [key: string]: any } = {};
-//   params.q = q;
-//   if (page) {
-//     params.page = page;
-//   }
+export function searchProjects(q: string, page?: number) {
+  const params: { [key: string]: any } = {};
+  params.q = q;
+  if (page) {
+    params.page = page;
+  }
   
-//   return request<any>(`projects?${qs.stringify(params)}`, 'get',);
-// }
+  return request<any>(`projects?${qs.stringify(params)}`, 'get',);
+}
 
 
 
 
-// export function getMyProjects(projectType: number, listType: number, page?: number) {
-//   const params: { [key: string]: any } = {};
-//   params.type = projectType;
-//   params.list = listType;
-//   if (page) {
-//     params.page = page;
-//   }
-//   return request<any>(`account/projects?${qs.stringify(params)}`, 'get');
-// }
+export function getMyProjects(projectType: number, listType: number, page?: number) {
+  const params: { [key: string]: any } = {};
+  params.type = projectType;
+  params.list = listType;
+  if (page) {
+    params.page = page;
+  }
+  return request<any>(`account/projects?${qs.stringify(params)}`, 'get');
+}
 
-export async function getProject(projectId: string) {
-  return request<any>(`api/project/${projectId}`, 'get');
+export async function getProject(projectId: number) {
+  return request<any>(`projects/${projectId}`, 'get');
 }
 
 export async function deleteProject(projectId: number) {
   return authRequest<any>(`projects/${projectId}`, 'delete');
 }
 
-export function createProject(name: string, description: string) {
+export function createProject(name: string, description: string, content: string, data: any, cover: File, draft: boolean, type: number) {
   const formData = new FormData();
-  // formData.append('cover', cover!);
+  formData.append('cover', cover!);
   formData.append('name', name);
   formData.append('description', description);
-  // formData.append('content', content);
-  // formData.append('data', JSON.stringify(data));
-  // formData.append('draft', draft.toString());
-  // formData.append('type', type.toString());
-  // return authRequest<IProject>('api/project/new', 'post', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
-  return authRequest<IProject>('api/project/new', 'post', {name: name, description: description} );
+  formData.append('content', content);
+  formData.append('data', JSON.stringify(data));
+  formData.append('draft', draft.toString());
+  formData.append('type', type.toString());
+  return authRequest<IProject>('projects', 'post', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 }
 
 export async function updateProject(id: number, name: string, description: string, content: string, data: any, cover: File | null, draft: boolean) {
@@ -82,8 +81,7 @@ export function createPage(projectId: number, parentId?: number) {
 }
 
 export async function getPage(projectId: number, pageId: number) {
-  // return request<IPage>(`api/project/${projectId}/pages/${pageId}`, 'get');
-  return request<IPage>(`api/project/${projectId}`, 'get');
+  return request<IPage>(`projects/${projectId}/pages/${pageId}`, 'get');
 }
 
 export async function updatePage(page: IPage, data: any, files?: File[]) {

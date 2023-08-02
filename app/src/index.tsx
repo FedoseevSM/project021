@@ -47,6 +47,7 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
+  <React.StrictMode>
     <StylesProvider injectFirst>
       <MuiThemeProvider theme={theme}>
         <Provider store={store}>
@@ -55,7 +56,8 @@ ReactDOM.render(
           </Router>
         </Provider>
       </MuiThemeProvider>
-    </StylesProvider>,
+    </StylesProvider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

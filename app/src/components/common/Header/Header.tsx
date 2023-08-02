@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { UserActionType } from 'store';
 import Tooltip from '@material-ui/core/Tooltip';
 import { staticBase } from 'helpers/constants';
-// import { readEvent } from 'api/user';
+import { readEvent } from 'api/user';
 
 import { ReactComponent as Logo } from 'icons/logo.svg';
 import { ReactComponent as Bell } from 'icons/bell.svg';
@@ -88,7 +88,7 @@ export default function HeaderCmp() {
           <span ></span>
         </div>
         <div className={s.right}>
-          {/* <form
+          <form
             className={s.search}
             onSubmit={e => {
               e.preventDefault();
@@ -100,10 +100,10 @@ export default function HeaderCmp() {
             <button type="submit" disabled={search.trim().length === 0}>
               <Search />
             </button>
-          </form> */}
+          </form>
           {user ? (
             <div className={s.auth}>
-              {/* <div className={s.authIcon} ref={eventsListRef} onClick={() => setNotificationShowed(!notificationShowed)}>
+              <div className={s.authIcon} ref={eventsListRef} onClick={() => setNotificationShowed(!notificationShowed)}>
                 <Tooltip classes={{ tooltip: 'tooltip' }} title="Уведомления">
                   <Bell />
                 </Tooltip>
@@ -153,11 +153,11 @@ export default function HeaderCmp() {
                                   return;
                                 }
                                 try {
-                                  // await readEvent(n._id.$oid);
-                                  // dispatch({
-                                  //   type: UserActionType.EVENT_READ_ACTION,
-                                  //   payload: n,
-                                  // });
+                                  await readEvent(n._id.$oid);
+                                  dispatch({
+                                    type: UserActionType.EVENT_READ_ACTION,
+                                    payload: n,
+                                  });
                                 } catch (err) {
                                   console.error(err)
                                 }
@@ -196,7 +196,7 @@ export default function HeaderCmp() {
                     <Folder /> 
                   </Tooltip>
                 </Link>
-              </div> */}
+              </div>
               <Link
                 to="/account" 
                 className={s.user}

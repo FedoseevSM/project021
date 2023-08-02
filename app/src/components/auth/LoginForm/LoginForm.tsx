@@ -29,7 +29,7 @@ export default function LoginForm({ onSave, onClose }: IProps) {
 
   return (
     <Popup onClose={onClose} title="Вход">
-      <div
+      <div 
         className={s.form}
       >
         {resend ? (
@@ -88,18 +88,18 @@ export default function LoginForm({ onSave, onClose }: IProps) {
             {error && <div className={s.error}>{error}</div>}
             <div className={s.bottom}>
 
-              {/* <SocialAuth /> */}
+              <SocialAuth />
               <div className={s.links}>
                 <div className={s.link}>
-                  <span
+                  <span 
                     onClick={() => {
                       dispatch({ type: UserActionType.LOGIN_VISIBILITY_ACTION, payload: false });
                       dispatch({ type: UserActionType.REGISTER_VISIBILITY_ACTION, payload: true });
                     }}>Создать аккаунт</span>
-
+                  
                 </div>
                 <div className={s.link}>
-                  <span
+                  <span 
                     onClick={() => {
                       dispatch({ type: UserActionType.LOGIN_VISIBILITY_ACTION, payload: false });
                       dispatch({ type: UserActionType.FORGET_PASSWORD_VISIBILITY_ACTION, payload: true });
@@ -129,21 +129,14 @@ export default function LoginForm({ onSave, onClose }: IProps) {
                       setIsLoading(true);
                       try {
                         const res = await authenticate(email, password);
-                        console.log(res.status);
-                        if (res.status === 202) {
-                        setJwtToken(res.headers["x-auth-token"]);
-                        console.log("response: ", res);
-                        console.log("token: ", res.headers["x-auth-token"]);
+                        setJwtToken(res.data.jwtToken);
                         onSave(res.data);
-                        }
                       } catch (err) {
-                        console.log(err);
-
-                        // if (err.response.data.message === 'Email не подтвержден') {
-                        //   setResend(true);
-                        // } else {
-                        //   setError(err.response.data.message);
-                        // }  
+                        if (err.response.data.message === 'Email не подтвержден') {
+                          setResend(true);
+                        } else {
+                          setError(err.response.data.message);
+                        }  
                       }
                       setIsLoading(false);
                     }
@@ -153,7 +146,7 @@ export default function LoginForm({ onSave, onClose }: IProps) {
             </div>
           </div>
         )}
-
+        
       </div>
     </Popup>
   );

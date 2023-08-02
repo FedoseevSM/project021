@@ -18,16 +18,12 @@ export function request<T>(
   let request: ICancelableRequest<T>;
   
   const newConfig = config ? { ...config } : {};
-  newConfig.headers =  { ...newConfig.headers, Authorization: `Bearer ${JWT_TOKEN}`, "X-Auth-Token": "" };
-  if (url == 'api/project/new' && method == "post") {
-    console.log("withMethod: ", {data});
-    request = axios[method]<T>(`${apiEndpoint}/${url}`, data, { ...newConfig, withCredentials: false, cancelToken: source.token });
-  } else if (method == 'post' || method === 'put' || method === 'patch') {
-    console.log("withMethod: ", {data});
-    request = axios[method]<T>(`${apiEndpoint}/${url}`, {data}, { ...newConfig, withCredentials: false, cancelToken: source.token });
+  newConfig.headers =  { ...newConfig.headers, Authorization: `Bearer ${JWT_TOKEN}` };
+
+  if (method === 'post' || method === 'put' || method === 'patch') {
+    request = axios[method]<T>(`${apiEndpoint}/${url}`, data, { ...newConfig, withCredentials: true, cancelToken: source.token });
   } else {
-    console.log("notMethod", {data});
-    request = axios[method]<T>(`${apiEndpoint}/${url}`, { ...newConfig, withCredentials: false, cancelToken: source.token });
+    request = axios[method]<T>(`${apiEndpoint}/${url}`, { ...newConfig, withCredentials: true, cancelToken: source.token });
   }
   request.cancel = (reason?: string) => source.cancel(reason || 'Cancel by user');
   return request;
@@ -35,7 +31,7 @@ export function request<T>(
 
 let JWT_TOKEN = '';
 let jwtRequest: any = null
-// let refreshTokenTimerId: any = null;
+let refreshTokenTimerId: any = null;
 
 export function setJwtToken(token: string) {
   JWT_TOKEN = token;
@@ -45,35 +41,32 @@ export function getJwtToken() {
   return JWT_TOKEN;
 }
 
-// export async function refreshToken() {
-//   clearTimeout(refreshTokenTimerId);
-//   refreshTokenTimerId = null;
-//   /**
-//    * Так нельзя писать функции, это похоже на половой член.
-//    */
-//   jwtRequest = new Promise(() => {});
-//   try {
-//     const { data } = await request<any>('account/refresh-token', 'post', { withCredentials: false });
-//     JWT_TOKEN = data.jwtToken;
-//     // startRefreshTokenTimer();
-//     Promise.resolve(jwtRequest);
-//     jwtRequest = null;
-//   } catch (err) {
-//     jwtRequest = null;
-//     JWT_TOKEN = '';
-//     console.error('Fail refresh token');
-//     Promise.resolve(jwtRequest);    
-//   } 
-// }
+export async function refreshToken() {
+  clearTimeout(refreshTokenTimerId);
+  refreshTokenTimerId = null;
+  jwtRequest = new Promise(() => {});
+  try {
+    const { data } = await request<any>('account/refresh-token', 'post', { withCredentials: true });
+    JWT_TOKEN = data.jwtToken;
+    startRefreshTokenTimer();
+    Promise.resolve(jwtRequest);
+    jwtRequest = null;
+  } catch (err) {
+    jwtRequest = null;
+    JWT_TOKEN = '';
+    console.error('Fail refresh token');
+    Promise.resolve(jwtRequest);    
+  } 
+}
 
-// window.onfocus = refreshToken;
+window.onfocus = refreshToken;
 
-// function startRefreshTokenTimer() {
-//   const jwtToken = JSON.parse(atob(JWT_TOKEN.split('.')[1]));
-//   const expires = new Date(jwtToken.exp * 1000);
-//   const timeout = expires.getTime() - Date.now() - (60 * 1000);
-//   refreshTokenTimerId = setTimeout(refreshToken, timeout);
-// }
+function startRefreshTokenTimer() {
+  const jwtToken = JSON.parse(atob(JWT_TOKEN.split('.')[1]));
+  const expires = new Date(jwtToken.exp * 1000);
+  const timeout = expires.getTime() - Date.now() - (60 * 1000);
+  refreshTokenTimerId = setTimeout(refreshToken, timeout);
+}
 
 export async function authRequest<T>(
   url: string, 
@@ -81,9 +74,9 @@ export async function authRequest<T>(
   data?: any, 
   config?: AxiosRequestConfig
 ): Promise<AxiosResponse<T>> {
-  // if (jwtRequest) {
-  //   await jwtRequest;
-  // }
+  if (jwtRequest) {
+    await jwtRequest;
+  }
   const newConfig = config ? { ...config } : {};
   newConfig.headers =  { ...newConfig.headers, Authorization: `Bearer ${JWT_TOKEN}` };
   try {

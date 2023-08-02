@@ -6,7 +6,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { AppState, ProjectActionType } from 'store';
 import TextField from 'components/form/TextField/TextField';
 import ProjectsList from 'components/project/ProjectsList/ProjectsList';
-// import { searchProjects, likeProject } from 'api/project';
+import { searchProjects, likeProject } from 'api/project';
 import useUser from 'hooks/useUser';
 import { UserActionType } from 'store';
 import { IProject } from 'models/project';
@@ -44,9 +44,9 @@ export default function Search() {
         const onLoad = async () => {
           setProjectLoaded(false);
           try {
-            // request = searchProjects(search);
-            // const { data } = await request;
-            // dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: data });
+            request = searchProjects(search);
+            const { data } = await request;
+            dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: data });
           } catch(err) {
             console.error(err);
             dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: [] });
@@ -93,10 +93,10 @@ export default function Search() {
         disabled={moreLoading}
         onMoreLoad={async () => {
           try {
-            // setMoreLoading(true);
-            // const { data } = await searchProjects(search, page + 1);
-            // setPage(page + 1);
-            // dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: [...projects, ...data] });
+            setMoreLoading(true);
+            const { data } = await searchProjects(search, page + 1);
+            setPage(page + 1);
+            dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: [...projects, ...data] });
           } catch(err) {
             console.error(err);
           }
@@ -108,10 +108,11 @@ export default function Search() {
             return;
           }
           try {
-            // const { data: { count, liked } } = await likeProject(project.id);
-            // const index = projects.indexOf(project);
-            // projects[index] = { ...project, likesCount: count, liked };
-            // dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: [...projects] });
+            const { data: { count, liked } } = await likeProject(project.id);
+            const index = projects.indexOf(project);
+            projects[index] = { ...project, likesCount: count, liked };
+            dispatch({ type: ProjectActionType.LOAD_PROJECTS_ACTION, payload: [...projects] });
+            
           } catch(err) {
 
           }

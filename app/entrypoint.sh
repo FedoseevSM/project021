@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
 yarn && yarn build
-mkdir dist
-mv ./build/* dist
+ls
+rm -rf /build/*
+mv ./build/* /build

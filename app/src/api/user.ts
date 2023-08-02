@@ -5,16 +5,16 @@ import { IUser, IUserInfo } from 'models/user';
 import qs from 'query-string';
 
 
-// export async function getAccount() {
-//   return authRequest<IUser>('account', 'get');
-// }
-
-export async function authenticate(email: string, password: string) {
-  return request<IUser>('api/user/login', 'post', { email: email.toLowerCase(), password: password });
+export async function getAccount() {
+  return authRequest<IUser>('account', 'get');
 }
 
-export async function register(first_name: string, last_name: string, email: string, password: string, language_code: string = "ru-ru") {
-  return request<any>('api/user', 'post', { first_name: first_name, last_name: last_name, email: email.toLowerCase(), password: password, language_code: language_code });
+export async function authenticate(email: string, password: string) {
+  return request<IUser>('account/authenticate', 'post', { email: email.toLowerCase(), password });
+}
+
+export async function register(name: string, email: string, password: string) {
+  return request<any>('account/register', 'post', { name, email: email.toLowerCase(), password });
 }
 
 export async function resendConfirmEmail(email: string, password: string) {
@@ -49,14 +49,14 @@ export async function signGoogle(code: string, redirectUri: string) {
   return request<any>(`account/google?code=${code}&redirect_uri=${redirectUri}`, 'get',);
 }
 
-// export async function getUser(userId: number) {
-//   return authRequest<IUser>(`users/${userId}`, 'get');
-// }
+export async function getUser(userId: number) {
+  return authRequest<IUser>(`users/${userId}`, 'get');
+}
 
-// export async function getUserInfo(userId?: number) {
-//   const url = userId ? `users/${userId}/info` : 'account/info';
-//   return authRequest<IUserInfo>(url, 'get');
-// }
+export async function getUserInfo(userId?: number) {
+  const url = userId ? `users/${userId}/info` : 'account/info';
+  return authRequest<IUserInfo>(url, 'get');
+}
 
 interface IAccountPayload {
   name: string; 
@@ -101,24 +101,24 @@ export function updateUserInfo(payload: IAccountPayload) {
   return authRequest<any>(url, 'put', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 }
 
-// export async function getEvents() {
-//   return authRequest<string[]>('events', 'get');
-// }
+export async function getEvents() {
+  return authRequest<string[]>('events', 'get');
+}
 
-// export async function readEvent(eventId: number) {
-//   return authRequest<IUser>(`events/${eventId}`, 'put');
-// }
+export async function readEvent(eventId: number) {
+  return authRequest<IUser>(`events/${eventId}`, 'put');
+}
 
-// export async function getUserProjects(userId: number, page?: number) {
-//   const params: { [key: string]: any } = {};
-//   params.user = userId.toString();
-//   if (page) {
-//     params.page = page;
-//   }
-//   return request<any>(`projects?${qs.stringify(params)}`, 'get',);
-// }
+export async function getUserProjects(userId: number, page?: number) {
+  const params: { [key: string]: any } = {};
+  params.user = userId.toString();
+  if (page) {
+    params.page = page;
+  }
+  return request<any>(`projects?${qs.stringify(params)}`, 'get',);
+}
 
-// export async function getUserComments(userId: number) {
-//   const url = `comments/?user=${userId}`;
-//   return authRequest<IComment[]>(url, 'get');
-// }
+export async function getUserComments(userId: number) {
+  const url = `comments/?user=${userId}`;
+  return authRequest<IComment[]>(url, 'get');
+}

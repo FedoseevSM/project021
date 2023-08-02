@@ -46,7 +46,7 @@ export default function PageMain() {
     [project?.pages]
   );
 
-  const isAdmin = user !== null && (user.user_id === project!.user_id) || (projectUsers && projectUsers.users.filter((u: any) => u.user_id === user?.user_id) !== -1);
+  const isAdmin = user !== null && (user.id === project!.user.id || (projectUsers && projectUsers.users.findIndex((u: any) => u.id === user.id) !== -1));
   
   return (
     <div className={cx(s.wrapper, { [s.draft]: page!.draft })}>
@@ -65,14 +65,14 @@ export default function PageMain() {
           project={project!}
           pages={pages}
           relative
-          canEdit={user !== null && (user.user_id === project!.user_id) || (projectUsers && projectUsers.users.filter((u: any) => u.user_id === user?.user_id) !== -1)}
+          canEdit={user !== null && (user.id === project!.user.id || (projectUsers && projectUsers.users.findIndex((u: any) => u.id === user.id) !== -1))}
           onAdd={async (id?: number) => {
-            // const { data: page } = await createPage(project!.id, id);
+            const { data: page } = await createPage(project!.id, id);
             await dispatch({ 
               type: ProjectActionType.LOAD_PROJECT_ACTION, 
               payload: { ...project, pages: [...(project!.pages || []), page] } 
             });
-            // history.push(`/project/${project!.id}/${page.id}/edit`);
+            history.push(`/project/${project!.id}/${page.id}/edit`);
           }}
         />
       </div>

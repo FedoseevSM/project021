@@ -30,7 +30,7 @@ export default function CreateProject() {
       <ProjectForm
         className={s.form} 
         onSave={project => {
-          history.push(`/project/${project.project_id}`);
+          history.push(`/project/${project.id}`);
         }} 
       />
     </div>

@@ -36,8 +36,8 @@ export default function CommentWidget({ disabled, hasLink, deleted, comment, cla
   const anonymous = comment.anonymous;
   const commentUser = comment.user;
   const [displayConfirmDelete, setDisplayConfirmDelete] = useState(false);
-  const canDelete = user && ((commentUser && user.user_id === commentUser.user_id) || user.isAdmin);
-  const canEdit = user && commentUser && user.user_id === commentUser.user_id;
+  const canDelete = user && ((commentUser && user.id === commentUser.id) || user.isAdmin);
+  const canEdit = user && commentUser && user.id === commentUser.id;
   const html = useMemo(
     () => {
       return comment.text;
@@ -80,7 +80,7 @@ export default function CommentWidget({ disabled, hasLink, deleted, comment, cla
               ) : (
                 hasLink ? (
                   <Link 
-                    to={`/users/${commentUser!.user_id}`}
+                    to={`/users/${commentUser!.id}`}
                     className={s.userImage}
                     style={{ backgroundImage: (commentUser!.cover ? `url(${commentUser!.cover.startsWith('images/') ? `${staticBase}/${commentUser!.cover}` : commentUser!.cover})` : '') }}
                   />
@@ -99,7 +99,7 @@ export default function CommentWidget({ disabled, hasLink, deleted, comment, cla
                 ) : (
                   hasLink ? (
                     <Link
-                      to={`/users/${commentUser!.user_id}`} 
+                      to={`/users/${commentUser!.id}`} 
                       className={s.name}
                     >
                       {commentUser!.name}

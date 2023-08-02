@@ -101,8 +101,6 @@ export function projectReducer(state = initialProjectState, action: { type: Proj
       return { ...state, projects: action.payload };
     case ProjectActionType.LOAD_PROJECT_ACTION:
       return { ...state, project: action.payload };
-    // case ProjectActionType.LOAD_PROJECT_ACTION:
-    //   return { ...state, project: action.payload };
     case ProjectActionType.LOAD_COMMENTS_ACTION:
       return { ...state, comments: action.payload };
       case ProjectActionType.LOAD_PAGE_ACTION:

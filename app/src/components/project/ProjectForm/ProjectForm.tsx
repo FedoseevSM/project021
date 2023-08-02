@@ -94,52 +94,45 @@ export default function ProjectForm({ className, project, onSave, onCancel }: IP
 
   const save = async () => {
     const errors: { [key: string]: string } = {};
-    // if (name.trim().length === 0) {
-    //   errors.name = 'Пустое значение';
-    // } else if (name.trim().length > 120) {
-    //   errors.name = 'Слишком длинное название';
-    // }
-    // if (description.trim().length === 0) {
-    //   errors.description = 'Пустое значение';
-    // } else if (description.trim().length > 5000) {
-    //   errors.description = 'Слишком длинное значение';
-    // }
+    if (name.trim().length === 0) {
+      errors.name = 'Пустое значение';
+    } else if (name.trim().length > 120) {
+      errors.name = 'Слишком длинное название';
+    }
+    if (description.trim().length === 0) {
+      errors.description = 'Пустое значение';
+    } else if (description.trim().length > 5000) {
+      errors.description = 'Слишком длинное значение';
+    }
     
-    // if (!cover && !project) {
-    //   errors.cover = 'Выберите изображение';
-    // } else if (cover && (cover.size / 1000000) > 10) {
-    //   errors.cover = 'Изображение слишком большое (10мб макс.)';
-    // }
+    if (!cover && !project) {
+      errors.cover = 'Выберите изображение';
+    } else if (cover && (cover.size / 1000000) > 10) {
+      errors.cover = 'Изображение слишком большое (10мб макс.)';
+    }
 
-    // if (content.trim().length === 0) {
-    //   errors.content = 'Пустое значение';
-    // } else if (content.trim().length > 15000) {
-    //   errors.content = 'Слишком длинное значение';
-    // }
+    if (content.trim().length === 0) {
+      errors.content = 'Пустое значение';
+    } else if (content.trim().length > 15000) {
+      errors.content = 'Слишком длинное значение';
+    }
     
     setErrors(errors);
-    // if (Object.keys(errors).length === 0) {
+    if (Object.keys(errors).length === 0) {
       setIsLoading(true);
       try {
-        // const res = await (project 
-        //   ? updateProject(project.id, name, description, content, dt, cover, draft)
-        //   : createProject(name, description, content, dt, cover!, draft, type)
-        // );
-        console.log("project: ", {name, description, content, dt, cover, draft, type})
-        const res = await createProject(name, description)
-        
-        console.log("response: ", res);
-        
+        const { data } = await (project 
+          ? updateProject(project.id, name, description, content, dt, cover, draft)
+          : createProject(name, description, content, dt, cover!, draft, type)
+        );
         if (onSave) {
-          onSave(res?.data);
+          onSave(data);
         }
       } catch (err) {
-        console.log(err);
-        
-        // setErrors(JSON.parse(err.data.message));
+        setErrors(JSON.parse(err.data.message));
       }
-      // setIsLoading(false);
-    // }
+      setIsLoading(false);
+    }
   }
 
   const onDelete = () => {
@@ -165,7 +158,7 @@ export default function ProjectForm({ className, project, onSave, onCancel }: IP
                     value={0}
                   /><span>Проект</span>
                 </div>
-                {/* <div>
+                <div>
                   <Radio
                     checked={type === 1}
                     onChange={(e: any) => setType(+e.target.value)}
@@ -178,7 +171,7 @@ export default function ProjectForm({ className, project, onSave, onCancel }: IP
                     onChange={(e: any) => setType(+e.target.value)}
                     value={2}
                   /><span>Обсуждение</span>
-                </div> */}
+                </div>
               </div>
             </div>
           )}
@@ -212,7 +205,7 @@ export default function ProjectForm({ className, project, onSave, onCancel }: IP
           </FormRow>
         </div>
         
-        {/* {coverPath ? (
+        {coverPath ? (
           <div className={s.image}>
             <img src={coverPath} alt="" />
             <button
@@ -234,10 +227,10 @@ export default function ProjectForm({ className, project, onSave, onCancel }: IP
           <input {...getInputProps()} />
           <p>Перетащите изображение сюда</p>
         </div>
-        )} */}
-        {/* {errors.cover && <div className={s.imageError}>{errors.cover}</div>} */}
+        )}
+        {errors.cover && <div className={s.imageError}>{errors.cover}</div>}
         
-        {/* <FormRow maxLength={15000} length={content.trim().length} className={s.row}>
+        <FormRow maxLength={15000} length={content.trim().length} className={s.row}>
           <ContentField 
             className={s.editor} 
             value={dt} 
@@ -247,7 +240,7 @@ export default function ProjectForm({ className, project, onSave, onCancel }: IP
             }}
             error={errors.content}
           />
-        </FormRow> */}
+        </FormRow>
         <div className={s.actions}>
           <div className={s.actionsLeft}>
             <button
@@ -257,7 +250,7 @@ export default function ProjectForm({ className, project, onSave, onCancel }: IP
             >
               {project ? 'Обновить' : 'Создать'}
             </button>
-            {/* <div className={s.public}>
+            <div className={s.public}>
               <Checkbox
                 checked={!draft}
                 
@@ -267,9 +260,9 @@ export default function ProjectForm({ className, project, onSave, onCancel }: IP
                 }}
               />
               <span>Публичный</span>
-            </div> */}
+            </div>
           </div>
-          {/* {project && (
+          {project && (
             <div className={s.actionsRight}>
               <button
                 disabled={isLoading}
@@ -286,10 +279,10 @@ export default function ProjectForm({ className, project, onSave, onCancel }: IP
                 Удалить
               </button>
             </div>
-          )} */}
+          )}
           
         </div>
-        {/* {deletedProject && (
+        {deletedProject && (
           <ConfirmWindow
             text="Вы уверены?"
             ok={async () => {
@@ -301,7 +294,7 @@ export default function ProjectForm({ className, project, onSave, onCancel }: IP
             okText="Удалить"
             cancelText="Отмена"
           />
-        )} */}
+        )}
       </div>
   );
 }
